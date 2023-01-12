@@ -1,0 +1,27 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+
+  button {
+    border: none;
+    text-align: center;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 10px;
+    background-color: rgb(54, 54, 54);
+    color: white;
+    cursor: pointer;
+    transition: all 300ms ease;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+}
+
+.numbered {
+  display: inline;
+}

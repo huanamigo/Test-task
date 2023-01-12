@@ -1,0 +1,32 @@
+.modal {
+  position: absolute;
+  background-color: rgb(54, 54, 54);
+  top: 50%;
+  left: 30%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  font-size: larger;
+  width: 22rem;
+  border-radius: 10px;
+  transition: all 300ms ease;
+
+  button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+
+    &:hover {
+      color: white !important;
+    }
+  }
+
+  span {
+    font-weight: 700;
+    font-size: larger;
+  }
+}
