@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Error = ({error}: any) => {
+interface IError {
+  error: string
+}
+
+const Error = ({error}: IError) => {
 
   const handleError = () => {
     if(error === '404') return "There is no such ID"

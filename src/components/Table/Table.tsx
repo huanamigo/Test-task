@@ -6,28 +6,31 @@ import Search from '../Search/Search'
 import ToReturn from '../ToReturn/ToReturn'
 import styles from './Table.module.scss'
 
+
 const Table = () => {
-  const [currentPage, changePage] = useState(1)
-  const [baseURL, changeURL] = useState(`https://reqres.in/api/products?per_page=5&page=${currentPage}`)
-  const [toShow, toggleShow] = useState(0)
-  const [chosen, choose] = useState({"id": 0,
-  "name": "placeholder",
-  "year": "placeholder",
-  "color": "fff",
-  "pantone_value": "placeholder"})
+  const [currentPage, changePage] = useState<number>(1)
+  const [baseURL, changeURL] = useState<string>(`https://reqres.in/api/products?per_page=5&page=${currentPage}`)
+  const [toShow, toggleShow] = useState<boolean>(false)
+  const [chosen, choose] = useState({
+    "id": 0,
+    "name": "",
+    "year": 0,
+    "color": "",
+    "pantone_value": ""
+  })
   const [searchValue, search] = useState('')
   const [isLoading, toggleLoad] = useState(true)
-  const [error, addErrorMsg] = useState('false')
+  const [error, addErrorMsg] = useState<string>('')
   const [data, setData] = useState({
-    //this is only placeholder for the rest code to work
-    "total_pages": 1,
+    // I haven't found a way to get rid off those placeholders but I also think that it's not the worst part of this code
+    "total_pages": 0,
     "data": [
       {
         "id": 0,
-        "name": "placeholder",
-        "year": "placeholder",
-        "color": "fff",
-        "pantone_value": "placeholder"
+        "name": "",
+        "year": 0,
+        "color": "",
+        "pantone_value": ""
       }
     ]
   })
@@ -40,10 +43,10 @@ const Table = () => {
           addErrorMsg(String(res.status))
         } else {
           const data = await res.json()
-        addErrorMsg('false')
+        addErrorMsg('')
         setData(data)
         toggleLoad(false)
-        toggleShow(0)
+        toggleShow(false)
         }
         
     }
@@ -54,10 +57,10 @@ const Table = () => {
   return (
 
     <div className={styles.container}>
-      <Search isLoading={isLoading} toggleLoad={toggleLoad} searchValue={searchValue} search={search} changeURL={changeURL}/>
-      {error !== 'false' ? <Error error={error}/> : <ToReturn data={data} chosen={chosen} choose={choose} isLoading={isLoading} searchValue={searchValue} toShow={toShow} toggleShow={toggleShow}/>}
+      <Search toggleLoad={toggleLoad} searchValue={searchValue} search={search} changeURL={changeURL}/>
+      {error !== '' ? <Error error={error}/> : <ToReturn data={data} chosen={chosen} choose={choose} isLoading={isLoading} searchValue={searchValue} toShow={toShow} toggleShow={toggleShow}/>}
       <Modal chosen={chosen} toShow={toShow} toggleShow={toggleShow}/>
-      {searchValue === '' ? <Buttons data={data} baseURL={baseURL} changeURL={changeURL} currentPage={currentPage} changePage={changePage}/> : null}
+      {searchValue === '' ? <Buttons data={data} changeURL={changeURL} currentPage={currentPage} changePage={changePage}/> : null}
     </div>
   )
 }

@@ -1,12 +1,19 @@
 import React from 'react'
 import styles from './Search.module.scss'
 
-const Search = ({toggleLoad, searchValue, search, changeURL}:any) => {
+interface IProps {
+  toggleLoad: React.Dispatch<React.SetStateAction<boolean>>
+  searchValue: string
+  search: React.Dispatch<React.SetStateAction<string>>
+  changeURL: React.Dispatch<React.SetStateAction<string>>,
+}
 
-  const handleSearch = (e:any) => {
+const Search = ({toggleLoad, searchValue, search, changeURL}: IProps) => {
+
+  const handleSearch = (e:React.FormEvent<HTMLInputElement>) => {
     toggleLoad(true)
-    search(e.target.value)
-    changeURL(`https://reqres.in/api/products?id=${e.target.value}`)
+    search(e.currentTarget.value)
+    changeURL(`https://reqres.in/api/products?id=${e.currentTarget.value}`)
   }
 
   return (
